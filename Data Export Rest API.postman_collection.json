@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "1a354e34-145e-4f6f-9c20-1ffa570b17d3",
+		"name": "Data Export Rest API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserLogin",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"URL\", \"https://eastdevapi.rrms.com/RestApiDev/api/\");",
+							"pm.collectionVariables.set(\"UserName\", \"xxx\");",
+							"pm.collectionVariables.set(\"Password\", \"xxx\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" var jsonData = pm.response.json();",
+							" if(jsonData.Success === true) {",
+							"    pm.collectionVariables.set(\"SessionNum\", jsonData.OutputParameter.SessionNum);",
+							"    pm.collectionVariables.set(\"SessionPassword\", jsonData.OutputParameter.SessionPassword);",
+							" }",
+							"",
+							"pm.test(\"Success = true\", function () {",
+							"    pm.expect(jsonData.Success).to.eql(true);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Connection",
+						"value": "close",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"{{UserName}}\",\r\n    \"Password\": \"{{Password}}\",\r\n    \"NewPassword\": null,\r\n    \"ApplicationName\": null,\r\n    \"ApplicationVersion\": null,\r\n    \"ClientPlatform\": null\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{URL}}Login/UserLogin",
+					"host": [
+						"{{URL}}Login"
+					],
+					"path": [
+						"UserLogin"
+					]
+				},
+				"description": "UserLogin is used to log into the system. It returns a SessionNum and SessionPassword that will be used for all subsequent calls."
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/ContactPhoneList",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SiteNum\": null,\r\n  \"SessionNum\": {{SessionNum}},\r\n  \"SessionPassword\": \"{{SessionPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/ContactPhoneList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"ContactPhoneList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/DeviceList",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "close",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SiteNum\": null,\r\n  \"TargetSiteGroup\": 9993,\r\n  \"SessionNum\": {{SessionNum}},\r\n   \"SessionPassword\": \"{{SessionPassword}}\"\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/DeviceList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"DeviceList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/ContactList",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SiteNum\": null,\r\n  \"TargetSiteGroup\": 3333,\r\n  \"SessionNum\": {{SessionNum}},\r\n   \"SessionPassword\": \"{{SessionPassword}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/ContactList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"ContactList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/SignalRuleList",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SiteNum\": null,\r\n  \"TargetSiteGroup\": 390041,\r\n  \"SessionNum\": {{SessionNum}},\r\n   \"SessionPassword\": \"{{SessionPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/SignalRuleList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"SignalRuleList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/SitePhoneList",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "close",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SiteNum\": null,\r\n  \"SessionNum\": {{SessionNum}},\r\n  \"SessionPassword\": \"{{SessionPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/SitePhoneList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"SitePhoneList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/AgencyList",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "close",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SiteNum\": null,\r\n  \"SessionNum\": {{SessionNum}},\r\n  \"SessionPassword\": \"{{SessionPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/AgencyList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"AgencyList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/SiteDetailList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Success = true\", function () {\r",
+							"    pm.expect(jsonData.Success === true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "close",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SiteNum\": null,\r\n  \"TargetSiteGroup\": 3333,\r\n  \"SessionNum\": {{SessionNum}},\r\n   \"SessionPassword\": \"{{SessionPassword}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/SiteDetailList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"SiteDetailList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/FirstSignalDatesList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Success = true\", function () {\r",
+							"    pm.expect(jsonData.Success === true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "close",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"SiteNum\": null,\r\n    \"TargetSiteGroup\": null,\r\n    \"UTCBeginDate\": \"2021-12-01\",\r\n    \"UTCEndDate\": \"2021-12-30\",\r\n    \"SessionNum\": {{SessionNum}},\r\n    \"SessionPassword\": \"{{SessionPassword}}\",\r\n    \"ApplicationCode\": null\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/FirstSignalDatesList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"FirstSignalDatesList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataExport/HistoryList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Success = true\", function () {\r",
+							"    pm.expect(jsonData.Success === true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "close",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"SiteNum\": null,\r\n    \"TargetSiteGroup\": null,\r\n    \"UTCBeginDate\": \"2022-22-01 08:00:00\",\r\n    \"UTCEndDate\": \"2022-22-01 17:30:00\",\r\n    \"SessionNum\": {{SessionNum}},\r\n    \"SessionPassword\": \"{{SessionPassword}}\",\r\n    \"ApplicationCode\": null,\r\n    \"ReportCodeList\": [\r\n        \"FC\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}DataExport/HistoryList",
+					"host": [
+						"{{URL}}DataExport"
+					],
+					"path": [
+						"HistoryList"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": ""
+		},
+		{
+			"key": "UserName",
+			"value": ""
+		},
+		{
+			"key": "Password",
+			"value": ""
+		},
+		{
+			"key": "SessionNum",
+			"value": ""
+		},
+		{
+			"key": "SessionPassword",
+			"value": ""
+		}
+	]
+}

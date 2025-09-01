@@ -1,0 +1,4 @@
+requests
+pytest
+click
+python-dotenv
