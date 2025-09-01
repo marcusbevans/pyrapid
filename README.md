@@ -1,5 +1,10 @@
 # pyRapid
 
+[![Python Test](https://github.com/marcusbevans/pyrapid/actions/workflows/python-test.yml/badge.svg)](https://github.com/marcusbevans/pyrapid/actions/workflows/python-test.yml)
+[![PyPI version](https://badge.fury.io/py/pyrapid.svg)](https://badge.fury.io/py/pyrapid)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pyrapid.svg)](https://pypi.org/project/pyrapid/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Python REST API client library for the Rapid Response Management System (RRMS) backend.
 
 ## Setup
